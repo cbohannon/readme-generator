@@ -27,16 +27,8 @@ def parse_args():
         description="Generate a README.md for a local code repository using Claude."
     )
     parser.add_argument("repo_path", help="Path to the local repository")
-    parser.add_argument(
-        "--output", "-o",
-        default=None,
-        help="Output file path (default: <repo_path>/README.md)",
-    )
-    parser.add_argument(
-        "--print-only", "-p",
-        action="store_true",
-        help="Print the generated README to stdout instead of writing a file",
-    )
+    parser.add_argument("--output", "-o", default=None, help="Output file path (default: <repo_path>/README.md)", )
+    parser.add_argument("--print-only", "-p", action="store_true", help="Print the generated README to stdout instead of writing a file", )
     return parser.parse_args()
 
 
