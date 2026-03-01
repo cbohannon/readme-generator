@@ -4,7 +4,7 @@ generator.py - Build the prompt and call the Claude API to generate a README.
 
 import anthropic
 
-MODEL = "claude-opus-4-6"
+DEFAULT_MODEL = "claude-opus-4-6"
 
 SYSTEM_PROMPT = """\
 You are an expert technical writer. Given information about a software project, \
@@ -58,7 +58,7 @@ Please generate a README.md for the project described below.
 """
 
 
-def generate_readme(tree: list[str], selected_files: list[tuple[str, str]]) -> str:
+def generate_readme(tree: list[str], selected_files: list[tuple[str, str]], model: str = DEFAULT_MODEL) -> str:
     """
     Call the Claude API and return the generated README as a string.
     Reads ANTHROPIC_API_KEY from the environment (loaded by the caller).
@@ -68,7 +68,7 @@ def generate_readme(tree: list[str], selected_files: list[tuple[str, str]]) -> s
     user_prompt = build_user_prompt(tree, selected_files)
 
     message = client.messages.create(
-        model=MODEL,
+        model=model,
         max_tokens=4096,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": user_prompt}],
